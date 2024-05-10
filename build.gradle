@@ -1,0 +1,58 @@
+group 'org.RetoTecnico'
+version '1.0'
+
+apply plugin: 'groovy'
+apply plugin: 'java'
+apply plugin: 'java-library'
+apply plugin: 'application'
+apply plugin: 'jacoco'
+apply plugin: "net.serenity-bdd.serenity-gradle-plugin"
+
+compileJava.options.encoding = "UTF-8"
+compileJava.options.encoding = "UTF-8"
+
+
+repositories {
+    mavenCentral()
+}
+
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "net.serenity-bdd:serenity-gradle-plugin:4.0.12"
+    }
+}
+
+dependencies {
+    //Dependencias de serenity
+    testImplementation 'net.serenity-bdd:serenity-cucumber:4.0.12'
+    testImplementation 'io.cucumber:cucumber-junit:7.13.0'
+    testImplementation 'net.serenity-bdd:serenity-ensure:4.0.12'
+    testImplementation 'org.mockito:mockito-core:5.5.0'
+    testImplementation 'org.slf4j:slf4j-simple:2.0.9'
+
+    implementation 'net.serenity-bdd:serenity-screenplay:4.0.12'
+    implementation 'net.serenity-bdd:serenity-screenplay-webdriver:4.0.12'
+    implementation 'net.serenity-bdd:serenity-junit:4.0.12'
+    implementation 'net.serenity-bdd:serenity-core:4.0.12'
+    implementation 'net.serenity-bdd:serenity-report-resources:4.0.12'
+
+    implementation 'io.cucumber:cucumber-java:7.13.0'
+    implementation 'org.slf4j:slf4j-api:2.0.9'
+    implementation 'org.apache.logging.log4j:log4j-core:2.20.0'
+
+}
+
+test{
+    useJUnit{
+        include("**/*")
+        gradle.startParameter.continueOnFailure = true
+        testLogging.showStandardStreams = true
+        systemProperties System.getProperties()
+        systemProperty "cucumber.filter.tags", System.getProperty("cucumber.filter.tags")
+    }
+}
