@@ -25,9 +25,13 @@ hs_err_pid*
 /target/
 
 # Intellij
-/.idea/
 .idea/
-/out/
+*.iws
+*.iml
+*.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
 
 # Gradle
 /build
@@ -104,7 +108,3 @@ local.properties
 
 ### Mac: almacén de servicios de escritorio ###
 /.DS_Store
-
-### Iseries: archivo EDP para levantar MyExtra ###
-/.EDP
-*.EDP
